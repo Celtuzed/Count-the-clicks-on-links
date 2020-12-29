@@ -8,9 +8,7 @@
 ```
 TOKEN=ВашТокен
 ```
-![alt text](D:\Python\unknown)
-![alt text](D:\Python\unknown (1))
-![alt text](D:\Python\unknown (2))
+
 Python3 должен быть уже установлен.
 Затем используйте `pip` (или `pip3`, есть конфликт с Python2) для установки зависимостей:
 ```
