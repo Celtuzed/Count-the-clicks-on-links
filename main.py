@@ -48,7 +48,7 @@ def check_bitlink(bitly_token, netloc_and_path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-    description='Описание что делает программа'
+    description='Этот код нужен для создания коротких ссылок (битлинков), а также для того чтобы узнать сколько раз перешли по сокращённой ссылке.'
     )
     parser.add_argument('url_or_bitlink', help='Битлинк или ссылка')
     args = parser.parse_args()
