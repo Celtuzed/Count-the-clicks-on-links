@@ -47,7 +47,6 @@ def check_bitlink(bitly_token, netloc_and_path):
     return response.ok
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(
     description='Описание что делает программа'
     )
