@@ -24,8 +24,6 @@ def get_shorten_link(bitly_token, long_url_or_bitlink):
         short_url = response.json()
         link = short_url['id']
         return link
-    else:
-        print("Ссылка введена неверно!")
 
 
 def get_count_clicks(bitly_token, netloc_and_path):
@@ -38,8 +36,6 @@ def get_count_clicks(bitly_token, netloc_and_path):
         count_clicks = response.json()
         clicks = count_clicks['total_clicks']
         return clicks
-    else:
-        print("Ссылка введена неверно!")
 
 
 def check_bitlink(bitly_token, netloc_and_path):
@@ -57,13 +53,13 @@ if __name__ == '__main__':
     )
     parser.add_argument('url_or_bitlink', help='Битлинк или ссылка')
     args = parser.parse_args()
-
-
     bitly_token = check_token()
     long_url_or_bitlink = args.url_or_bitlink
     parsed_url = urlparse(long_url_or_bitlink)
     netloc_and_path = (parsed_url.netloc + parsed_url.path)
     if check_bitlink(bitly_token, netloc_and_path):
         print('Количество переходов по битлинку -', get_count_clicks(bitly_token, netloc_and_path))
-    else:
+    elif get_shorten_link(bitly_token, long_url_or_bitlink):
         print('сокращённая cсылка - ', get_shorten_link(bitly_token, long_url_or_bitlink))
+    elif not get_shorten_link(bitly_token, long_url_or_bitlink):
+        print("Ссылка введена неверно!")
