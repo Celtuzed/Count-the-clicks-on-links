@@ -1,14 +1,9 @@
 import requests
 import os
+import logging
 import argparse
 from urllib.parse import urlparse
 from dotenv import load_dotenv
-
-
-def check_token():
-    load_dotenv()
-    bitly_token = os.getenv("SECRET_TOKEN")
-    return bitly_token
 
 
 def get_shorten_link(bitly_token, long_url_or_bitlink):
@@ -47,12 +42,14 @@ def check_bitlink(bitly_token, netloc_and_path):
     return response.ok
 
 if __name__ == '__main__':
+    load_dotenv()
+    logging.error('Ссылка введена неверно!!!')
+    bitly_token = os.getenv("SECRET_TOKEN")
     parser = argparse.ArgumentParser(
     description='Этот код нужен для создания коротких ссылок (битлинков), а также для того чтобы узнать сколько раз перешли по сокращённой ссылке.'
     )
     parser.add_argument('url_or_bitlink', help='Битлинк или ссылка')
     args = parser.parse_args()
-    bitly_token = check_token()
     long_url_or_bitlink = args.url_or_bitlink
     parsed_url = urlparse(long_url_or_bitlink)
     netloc_and_path = (parsed_url.netloc + parsed_url.path)
@@ -60,5 +57,3 @@ if __name__ == '__main__':
         print('Количество переходов по битлинку -', get_count_clicks(bitly_token, netloc_and_path))
     elif get_shorten_link(bitly_token, long_url_or_bitlink):
         print('сокращённая cсылка - ', get_shorten_link(bitly_token, long_url_or_bitlink))
-    elif not get_shorten_link(bitly_token, long_url_or_bitlink):
-        print("Ссылка введена неверно!")
