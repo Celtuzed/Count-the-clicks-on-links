@@ -44,7 +44,7 @@ def check_bitlink(bitly_token, netloc_and_path):
 if __name__ == '__main__':
     load_dotenv()
     logging.error('Ссылка введена неверно!!!')
-    bitly_token = os.getenv("SECRET_TOKEN")
+    bitly_token = os.getenv("BITLY_TOKEN")
     parser = argparse.ArgumentParser(
     description='Этот код нужен для создания коротких ссылок (битлинков), а также для того чтобы узнать сколько раз перешли по сокращённой ссылке.'
     )
