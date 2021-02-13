@@ -39,7 +39,6 @@ def check_bitlink(bitly_token, netloc_and_path):
         "Authorization": "Bearer {}".format(bitly_token)
     }
     response = requests.get(url, headers=authorization_data)
-    response.raise_for_status()
     return response.ok
 
 if __name__ == '__main__':
@@ -53,14 +52,13 @@ if __name__ == '__main__':
     args = parser.parse_args()
     long_url_or_bitlink = args.url_or_bitlink
     parsed_url = urlparse(long_url_or_bitlink)
-    netloc_and_path = (f"{parsed_url.netloc + parsed_url.path}")
+    netloc_and_path = f"{parsed_url.netloc}{parsed_url.path}"
 
     try:
         if check_bitlink(bitly_token, netloc_and_path):
             clicks = get_count_clicks(bitly_token, netloc_and_path)
             print("Количество переходов по битлинку -", clicks)
-    except requests.exceptions.HTTPError:
-            try:
-                print('сокращённая cсылка - ', get_shorten_link(bitly_token, long_url_or_bitlink))
-            except requests.exceptions.HTTPError as error:
-                print(error)
+        else:
+            print('сокращённая cсылка - ', get_shorten_link(bitly_token, long_url_or_bitlink))
+    except requests.exceptions.HTTPError as error:
+            print(error)
