@@ -23,3 +23,10 @@ main.py https://ficbook.net/
 ### Цель проекта
 
 Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
+
+
+| Left-Aligned  | Center Aligned  | Right Aligned |
+| :------------ |:---------------:| -----:|
+| col 3 is      | some wordy text | 00 |
+| col 2 is      | centered        |    |
+| zebra stripes | are neat        |     |
